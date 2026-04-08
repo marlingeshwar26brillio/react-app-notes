@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import '../css/Signup.css'
 
 export default function Signup() {
   const [form, setForm] = useState({ name: '', email: '', password: '' })
