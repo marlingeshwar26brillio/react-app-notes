@@ -1,33 +1,20 @@
-import { Link, useNavigate } from 'react-router-dom'
-import '../css/Navbar.css'
+import { useAuth } from "../context/AuthContext";
+import { useTheme } from "../context/ThemeContext";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
-  const navigate = useNavigate()
-  const user = JSON.parse(localStorage.getItem('user') || 'null')
-
-  const logout = () => {
-    localStorage.removeItem('user')
-    navigate('/login')
-  }
+  const { logout } = useAuth();
+  const { toggleTheme } = useTheme();
 
   return (
-    <nav className="nav">
-      <Link to="/" className="brand">MyNotes</Link>
-      <div className="links">
-        <Link to="/" className="a">Home</Link>
-        {user ? (
-          <>
-            <Link to="/dashboard" className="a">Dashboard</Link>
-            <span className="name">Hi, {user.name}</span>
-            <button onClick={logout} className="btn">Logout</button>
-          </>
-        ) : (
-          <>
-            <Link to="/login" className="a">Login</Link>
-            <Link to="/signup" className="a">Sign Up</Link>
-          </>
-        )}
+    <div className="navbar">
+      <h2>Notely</h2>
+      <div>
+        <Link to="/app">Notes</Link>
+        <Link to="/trash">Trash</Link>
+        <button onClick={toggleTheme}>Theme</button>
+        <button onClick={logout}>Logout</button>
       </div>
-    </nav>
-  )
+    </div>
+  );
 }
