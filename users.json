@@ -1,0 +1,32 @@
+[
+    {
+        "id": "74eed087-c308-4e55-80b5-906a35669d2d",
+        "username": "marlingeshwark@gmail.com",
+        "password": "1234",
+        "createdAt": 1775796586605
+    },
+    {
+        "id": "57d977eb-5284-406d-a2e2-fa982dc9650a",
+        "username": "marlingeshwarkattimani@gmail.com",
+        "password": "123",
+        "createdAt": 1775798408412
+    }
+]
+
+
+notes_57d977eb-5284-406d-a2e2-fa982dc9650a
+
+[
+    {
+        "id": "c593b52b-4c35-44fb-991c-82275056864b",
+        "title": "Raja beta",
+        "content": "SRK is Love",
+        "tags": [
+            "SRK",
+            "King"
+        ],
+        "isTrashed": false,
+        "createdAt": 1775798417064,
+        "updatedAt": 1775798516210
+    }
+]
