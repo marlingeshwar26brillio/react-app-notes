@@ -21,14 +21,14 @@ Hey there! Notely is a cool little notes app built with React and Vite. It's all
 ```
 src/
 ├── components/          # UI bits like buttons and cards
-│   ├── ConfirmModal.jsx (Yet to be implemented)
-│   ├── FilterChips.jsx  (Yet to be implemented)
-│   ├── Navbar.jsx
-│   ├── NoteCard.jsx   (Yet to be implemented)
-│   ├── ProtectedRoute.jsx  (Yet to be implemented)
-│   ├── SaveIndicator.jsx  (Yet to be implemented)
-│   ├── SearchBar.jsx  (Yet to be implemented)
-│   └── TagInput.jsx  (Yet to be implemented)
+│   ├── ConfirmModal.jsx ✅
+│   ├── FilterChips.jsx  ✅
+│   ├── Navbar.jsx✅
+│   ├── NoteCard.jsx  ✅
+│   ├── ProtectedRoute.jsx ✅
+│   ├── SaveIndicator.jsx ✅
+│   ├── SearchBar.jsx ✅
+│   └── TagInput.jsx  ✅
 ├── context/             # State management stuff
 │   ├── AuthContext.jsx ✅
 │   ├── NotesContext.jsx ✅
