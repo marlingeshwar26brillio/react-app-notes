@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Signup() {
-  const { signup } = useAuth();
+  const { user, signup } = useAuth();
   const nav = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      nav("/app");
+    }
+  }, [user, nav]);
+
   const [username, setU] = useState("");
   const [password, setP] = useState("");
   const [err, setErr] = useState("");
@@ -26,11 +33,45 @@ export default function Signup() {
   };
 
   return (
-    <form className="auth" onSubmit={submit}>
-      <h2>Create Account</h2>
-      <input placeholder="Username" onChange={e=>setU(e.target.value)} />
-      <input type="password" placeholder="Password" onChange={e=>setP(e.target.value)} />
-      <button>Signup</button>
-    </form>
+    <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4 relative">
+      <Link
+        to="/"
+        className="absolute top-6 left-6 px-4 py-2 rounded-lg text-slate-700 hover:bg-slate-200 transition-colors font-medium"
+      >
+        ← Back
+      </Link>
+      <form onSubmit={submit} className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8">
+        <h2 className="text-3xl font-bold text-center mb-2 text-slate-900">Create Account</h2>
+        <p className="text-center text-slate-600 mb-8 text-sm">Join Notely and start organizing</p>
+        
+        {err && <p className="text-red-500 text-sm mb-4 text-center font-medium">{err}</p>}
+        
+        <div className="space-y-4">
+          <input 
+            placeholder="Username" 
+            value={username}
+            onChange={e=>setU(e.target.value)} 
+            className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+          />
+          <input 
+            type="password" 
+            placeholder="Password" 
+            value={password}
+            onChange={e=>setP(e.target.value)} 
+            className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+          />
+          <button 
+            type="submit"
+            className="w-full px-4 py-3 bg-linear-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all transform hover:-translate-y-0.5 shadow-lg"
+          >
+            Sign Up
+          </button>
+        </div>
+
+        <p className="text-center mt-6 text-slate-600 ">
+          Already have an account? <Link to="/login" className="text-blue-500  font-semibold hover:underline">Login</Link>
+        </p>
+      </form>
+    </div>
   );
 }

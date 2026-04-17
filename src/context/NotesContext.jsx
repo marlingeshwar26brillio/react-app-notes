@@ -11,17 +11,22 @@ export function NotesProvider({ children }) {
 
   useEffect(() => {
     if (user) {
-      const savedNotes = getUserNotes(user.id).map(note => ({
-        ...note,
-        tags: Array.isArray(note.tags) ? note.tags : []
-      }));
+      const savedNotes = getUserNotes(user.id)
+        .map(note => ({
+          ...note,
+          tags: Array.isArray(note.tags) ? note.tags : []
+        }))
+        .filter(note => note.title && note.title.trim());
       setNotes(savedNotes);
     }
   }, [user]);
 
   useEffect(() => {
-    if (user) saveUserNotes(user.id, notes);
-  }, [notes]);
+    if (user) {
+      const notesWithTitle = notes.filter(note => note.title && note.title.trim());
+      saveUserNotes(user.id, notesWithTitle);
+    }
+  }, [notes, user]);
 
   const addNote = () => {
     setNotes([
@@ -38,11 +43,22 @@ export function NotesProvider({ children }) {
     ]);
   };
 
-  const updateNote = (id, data) =>
-    setNotes(notes.map(n => n.id === id ? { ...n, ...data, updatedAt: Date.now() } : n));
+  const updateNote = (id, data) => {
+    setNotes(notes.map((n) => {
+      if (n.id !== id) return n;
+
+      const nextNote = { ...n, ...data };
+      if (!nextNote.title || !nextNote.title.trim()) return n;
+
+      return { ...nextNote, updatedAt: Date.now() };
+    }));
+  };
+
+  const deleteEmptyNote = (id) =>
+    setNotes(notes.filter(n => n.id !== id));
 
   const trashNote = (id) =>
-    updateNote(id, { isTrashed: true });
+    setNotes(notes.map(n => n.id === id && n.title.trim() ? { ...n, isTrashed: true, updatedAt: Date.now() } : n));
 
   const restoreNote = (id) =>
     updateNote(id, { isTrashed: false });
@@ -52,7 +68,7 @@ export function NotesProvider({ children }) {
 
   return (
     <NotesContext.Provider value={{
-      notes, addNote, updateNote, trashNote, restoreNote, deleteForever
+      notes, addNote, updateNote, deleteEmptyNote, trashNote, restoreNote, deleteForever
     }}>
       {children}
     </NotesContext.Provider>

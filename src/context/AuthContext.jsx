@@ -1,18 +1,16 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { getUsers, saveUsers, getSession, setSession, clearSession } from "../utils/storage";
 
 const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
+  const [user, setUser] = useState(() => {
     const session = getSession();
-    if (!session) return;
+    if (!session) return null;
     const users = getUsers();
-    setUser(users.find(u => u.id === session.userId));
-  }, []);
+    return users.find(u => u.id === session.userId) || null;
+  });
 
   const signup = async (username, password) => {
     const users = getUsers();
