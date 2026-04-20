@@ -1,11 +1,17 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import GridPattern from "../components/GridPattern";
 
 export default function Landing() {
   const { user, logout } = useAuth();
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 relative overflow-hidden">
+      <GridPattern
+        width={42}
+        height={42}
+        className="opacity-45 mask-[radial-gradient(ellipse_at_top,white,transparent_70%)]"
+      />
       {/* Navbar */}
         <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -58,7 +64,7 @@ export default function Landing() {
       </nav>
 
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-6 py-20 md:py-32">
+      <section className="relative z-10 max-w-7xl mx-auto px-6 py-20 md:py-32">
         <div className="text-center">
           <h2 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
             Organize Your Thoughts,<br /> <span className="bg-linear-to-r from-blue-500 to-indigo-600 bg-clip-text text-transparent">Amplify Your Mind</span>
@@ -86,7 +92,7 @@ export default function Landing() {
       </section>
 
       {/* Features Section */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
+      <section className="relative z-10 max-w-7xl mx-auto px-6 py-20">
         <h3 className="text-4xl font-bold text-center text-slate-900 mb-16">
           Why Choose Notely?
         </h3>
@@ -149,7 +155,7 @@ export default function Landing() {
       </section>
 
       {/* CTA Section */}
-      <section className="max-w-5xl mx-auto px-6 py-20">
+      <section className="relative z-10 max-w-5xl mx-auto px-6 py-20">
         <div className="bg-linear-to-r from-blue-500 to-indigo-600 rounded-3xl p-12 text-center shadow-xl">
           <h3 className="text-white mb-4">
             Ready to Get Started?
@@ -167,7 +173,7 @@ export default function Landing() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-100 border-t border-slate-200 py-12 mt-20">
+      <footer className="relative z-10 bg-slate-100 border-t border-slate-200 py-12 mt-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             <div>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import ConfirmModal from "../components/ConfirmModal";
 import { useNotes } from "../context/NotesContext";
+import GridPattern from "../components/GridPattern";
 
 export default function Trash() {
   const { notes, restoreNote, deleteForever } = useNotes();
@@ -12,8 +13,13 @@ export default function Trash() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="min-h-screen bg-slate-50 relative overflow-hidden">
+        <GridPattern
+          width={40}
+          height={40}
+          className="opacity-55 mask-[radial-gradient(ellipse_at_top,white,transparent_72%)]"
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
           <h1 className="text-4xl font-bold text-slate-900 mb-2">Trash</h1>
           <p className="text-slate-600 mb-8">{trashed.length} item{trashed.length !== 1 ? 's' : ''}</p>
 

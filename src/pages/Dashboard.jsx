@@ -6,6 +6,7 @@ import NotePreviewModal from "../components/NotePreviewModal";
 import NoteEditModal from "../components/NoteEditModal";
 import SearchBar from "../components/SearchBar";
 import FilterChips from "../components/FilterChips";
+import GridPattern from "../components/GridPattern";
 
 export default function Dashboard() {
   const { notes, addNote } = useNotes();
@@ -36,8 +37,13 @@ export default function Dashboard() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="min-h-screen bg-slate-50 relative overflow-hidden">
+        <GridPattern
+          width={40}
+          height={40}
+          className="opacity-55 mask-[radial-gradient(ellipse_at_top,white,transparent_72%)]"
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
           <div className="mb-12">
             <h1 className="text-4xl font-bold text-slate-900 mb-8">My Notes</h1>
             <SearchBar value={search} onChange={setSearch} />
@@ -99,7 +105,7 @@ export default function Dashboard() {
 
       {/* Preview Modal */}
       <NotePreviewModal 
-        note={selectedNote}
+        note={selectedNote ? notes.find(n => n.id === selectedNote.id) || selectedNote : null}
         isOpen={!!selectedNote}
         onClose={() => setSelectedNote(null)}
       />

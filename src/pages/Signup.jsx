@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import GridPattern from "../components/GridPattern";
 
 export default function Signup() {
   const { user, signup } = useAuth();
@@ -33,14 +34,19 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4 relative">
+    <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4 relative overflow-hidden">
+      <GridPattern
+        width={36}
+        height={36}
+        className="opacity-60 mask-[radial-gradient(ellipse_at_center,white,transparent_75%)]"
+      />
       <Link
         to="/"
-        className="absolute top-6 left-6 px-4 py-2 rounded-lg text-slate-700 hover:bg-slate-200 transition-colors font-medium"
+        className="absolute top-6 left-6 z-10 px-4 py-2 rounded-lg text-slate-700 hover:bg-slate-200 transition-colors font-medium"
       >
         ← Back
       </Link>
-      <form onSubmit={submit} className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8">
+      <form onSubmit={submit} className="relative z-10 w-full max-w-md bg-white rounded-3xl shadow-xl p-8">
         <h2 className="text-3xl font-bold text-center mb-2 text-slate-900">Create Account</h2>
         <p className="text-center text-slate-600 mb-8 text-sm">Join Notely and start organizing</p>
         
