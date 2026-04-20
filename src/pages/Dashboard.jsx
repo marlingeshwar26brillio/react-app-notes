@@ -37,7 +37,7 @@ export default function Dashboard() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-slate-50 relative overflow-hidden">
+      <div className="min-h-screen bg-slate-50 dark:bg-neutral-900 relative overflow-hidden transition-colors duration-300">
         <GridPattern
           width={40}
           height={40}
@@ -45,7 +45,7 @@ export default function Dashboard() {
         />
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
           <div className="mb-12">
-            <h1 className="text-4xl font-bold text-slate-900 mb-8">My Notes</h1>
+            <h1 className="text-4xl font-bold text-slate-900 dark:text-neutral-100 mb-8">My Notes</h1>
             <SearchBar value={search} onChange={setSearch} />
           </div>
 
@@ -54,7 +54,7 @@ export default function Dashboard() {
               <FilterChips notes={activeNotes} selected={selectedTags} setSelected={setSelectedTags}/>
               
               <div className="flex items-center justify-between mb-8">
-                <p className="text-slate-600">
+                <p className="text-slate-600 dark:text-neutral-400">
                   {filtered.length} of {activeNotes.length} notes
                 </p>
                 <button 
@@ -70,8 +70,8 @@ export default function Dashboard() {
           {activeNotes.length === 0 && (
             <div className="text-center py-20">
               <p className="text-6xl mb-4">📝</p>
-              <h2 className="text-2xl font-bold text-slate-900 mb-4">No notes yet</h2>
-              <p className="text-slate-600 mb-8">Create your first note to get started!</p>
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-neutral-100 mb-4">No notes yet</h2>
+              <p className="text-slate-600 dark:text-neutral-400 mb-8">Create your first note to get started!</p>
               <button 
                 onClick={handleNewNote}
                 className="px-6 py-3 bg-linear-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all transform hover:-translate-y-0.5 shadow-lg"
@@ -84,8 +84,8 @@ export default function Dashboard() {
           {activeNotes.length > 0 && filtered.length === 0 && (
             <div className="text-center py-20">
               <p className="text-6xl mb-4">🔍</p>
-              <p className="text-xl font-semibold text-slate-900">No notes match your search</p>
-              <p className="text-slate-600 mt-2">Try adjusting your search or filters</p>
+              <p className="text-xl font-semibold text-slate-900 dark:text-neutral-100">No notes match your search</p>
+              <p className="text-slate-600 dark:text-neutral-400 mt-2">Try adjusting your search or filters</p>
             </div>
           )}
 
