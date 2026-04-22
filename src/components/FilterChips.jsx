@@ -1,1 +1,41 @@
-export default function FilterChips({ notes, selected, setSelected }) { const allTags = [...new Set(notes.flatMap(n => n.tags || []))]; const toggleTag = (tag) => { if (selected.includes(tag)) setSelected(selected.filter(t => t !== tag)); else setSelected([...selected, tag]); }; const clearSelection = () => setSelected([]); if (allTags.length === 0) { return <div className="text-slate-500 dark:text-neutral-400 text-sm py-4">No tags available yet.</div>; } return ( <div className="flex flex-wrap gap-2 py-4"> {allTags.map(tag => ( <button key={tag} type="button" onClick={() => toggleTag(tag)} className={`px-4 py-2 rounded-full font-medium transition-all ${ selected.includes(tag) ? "bg-linear-to-r from-blue-500 to-indigo-600 text-white shadow-md" : "bg-slate-100 dark:bg-neutral-800 text-slate-700 dark:text-neutral-300 hover:bg-slate-200 dark:hover:bg-neutral-700" }`} > #{tag} </button> ))} {selected.length > 0 && ( <button type="button" onClick={clearSelection} className="px-4 py-2 rounded-full font-medium bg-slate-200 dark:bg-neutral-800 text-slate-700 dark:text-neutral-300 hover:bg-slate-300 dark:hover:bg-neutral-700 transition-all text-sm" > Clear filters </button> )} </div> ); }
+export default function FilterChips({ notes, selected, setSelected }) {
+  const allTags = [...new Set(notes.flatMap((n) => n.tags || []))];
+  const toggleTag = (tag) => {
+    if (selected.includes(tag)) setSelected(selected.filter((t) => t !== tag));
+    else setSelected([...selected, tag]);
+  };
+  const clearSelection = () => setSelected([]);
+  if (allTags.length === 0) {
+    return (
+      <div className="text-slate-500 dark:text-neutral-400 text-sm py-4">
+        No tags available yet.
+      </div>
+    );
+  }
+  return (
+    <div className="flex flex-wrap gap-2 py-4">
+      {" "}
+      {allTags.map((tag) => (
+        <button
+          key={tag}
+          type="button"
+          onClick={() => toggleTag(tag)}
+          className={`px-4 py-2 rounded-full font-medium transition-all ${selected.includes(tag) ? "bg-linear-to-r from-blue-500 to-indigo-600 text-white shadow-md" : "bg-slate-100 dark:bg-neutral-800 text-slate-700 dark:text-neutral-300 hover:bg-slate-200 dark:hover:bg-neutral-700"}`}
+        >
+          {" "}
+          #{tag}{" "}
+        </button>
+      ))}{" "}
+      {selected.length > 0 && (
+        <button
+          type="button"
+          onClick={clearSelection}
+          className="px-4 py-2 rounded-full font-medium bg-slate-200 dark:bg-neutral-800 text-slate-700 dark:text-neutral-300 hover:bg-slate-300 dark:hover:bg-neutral-700 transition-all text-sm"
+        >
+          {" "}
+          Clear filters{" "}
+        </button>
+      )}{" "}
+    </div>
+  );
+}

@@ -12,7 +12,7 @@ import "./styles.css";
 
 export default function App() {
   return (
-    <HashRouter>
+    <HashRouter> //used this because it works in github pages and if browser is refreshed it works
       <ThemeProvider>
         <AuthProvider>
           <NotesProvider>
